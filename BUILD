@@ -3,6 +3,7 @@
 #    that expose native browsers API.
 #
 
+load("@bazel_common_javadoc//:javadoc.bzl", "javadoc_library")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@rules_license//rules:license.bzl", "license")
 load("@com_google_jsinterop_generator//:jsinterop_generator.bzl", "jsinterop_generator")
@@ -86,4 +87,29 @@ jsinterop_generator(
 jsinterop_generator(
     name = "elemental2-indexeddb",
     exports = ["//java/elemental2/indexeddb"],
+)
+
+javadoc_library(
+    name = "javadoc",
+    srcs = [
+        "//java/elemental2/core:core_generated_files",
+        "//java/elemental2/dom:dom_generated_files",
+        #"//java/elemental2/promise:promise_generated_files",
+        "//java/elemental2/svg:svg_generated_files",
+        "//java/elemental2/webgl:webgl_generated_files",
+        "//java/elemental2/media:media_generated_files",
+        "//java/elemental2/indexeddb:indexeddb_generated_files",
+        "//java/elemental2/webstorage:webstorage_generated_files",
+    ],
+    deps = [
+        "//java/elemental2/core",
+        "//java/elemental2/dom",
+        "//java/elemental2/promise",
+        "//java/elemental2/svg",
+        "//java/elemental2/webgl",
+        "//java/elemental2/media",
+        "//java/elemental2/indexeddb",
+        "//java/elemental2/webstorage",
+    ],
+    tags = ["manual"],
 )
